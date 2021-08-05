@@ -35,6 +35,11 @@ public class GenericServiceImpl implements GenericService.Iface {
         //["4","5"]
         List<String> requestObjs = request.getRequestObj ();
         Class<?> targetImpl = AopUtils.getTargetClass ( realImpl );
+        Class<?> ifaceClass = getIfaceClass ( targetImpl );
+        if (ifaceClass == null) {
+            throw new TException ("class:" + targetImpl + " not found in the iface service!" );
+
+        }
         this.realClassName = targetImpl.getName ();
         checkparam(request);
 
@@ -55,13 +60,13 @@ public class GenericServiceImpl implements GenericService.Iface {
         List<Object> realRequest = null;
         if(realClassTypes==null || realClassTypes.size ()==0){
             try {
-                method = targetImpl.getMethod ( methodName );
+                method = ifaceClass.getMethod ( methodName );
             } catch (NoSuchMethodException e) {
                 throw new TException ( "class:" + realClassName +  ",method:"+methodName+ " not found !" );
             }
         } else{
             try {
-                method = targetImpl.getMethod ( methodName ,realClassTypes.toArray ( new Class[0] ));
+                method = ifaceClass.getMethod ( methodName ,realClassTypes.toArray ( new Class[0] ));
             } catch (NoSuchMethodException e) {
                 throw new TException ( "class:" + realClassName +  ",method:"+methodName+ " not found !" );
             }
@@ -142,4 +147,21 @@ public class GenericServiceImpl implements GenericService.Iface {
             throw new TException ( "class:" + realClassName +  ",methodName can not be empty!" );
         }
     }
+
+    public Class getIfaceClass(Class classImpl){
+        while (classImpl != Object.class){
+            Class[] interfaces = classImpl.getInterfaces ();
+
+            if(interfaces!= null){
+                for(Class iface:interfaces){
+                    if(iface.getName ().contains ( "$Iface" )){
+                        return iface;
+                    }
+                }
+            }
+            classImpl = classImpl.getSuperclass ();
+        }
+        return null;
+    }
+
 }

@@ -81,23 +81,23 @@ maven依赖
 ```
 namespace java thrift.service
 
-include 'WmCreateAccountRequest.thrift'
-include 'WmCreateAccountRespone.thrift'
+include 'TestCreateAccountRequest.thrift'
+include 'TestCreateAccountRespone.thrift'
 
-service WmCreateAccountService {
-      WmCreateAccountRespone.WmCreateAccountRespone getRPC(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest1(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest2(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest3(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest4(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest5(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest6(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest7(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest8(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest9(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest10(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest11(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
-      WmCreateAccountRespone.WmCreateAccountRespone koaloasTest12(1:WmCreateAccountRequest.WmCreateAccountRequest wmCreateAccountRequest);
+service TestCreateAccountService {
+      TestCreateAccountRespone.TestCreateAccountRespone getRPC(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest1(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest2(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest3(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest4(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest5(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest6(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest7(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest8(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest9(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest10(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest11(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
+      TestCreateAccountRespone.TestCreateAccountRespone koaloasTest12(1:TestCreateAccountRequest.TestCreateAccountRequest TestCreateAccountRequest);
 }
 ```
 
@@ -107,7 +107,7 @@ namespace java thrift.domain
 /**
 * 测试类
 **/
-struct WmCreateAccountRequest {
+struct TestCreateAccountRequest {
 
     1:i32 source,
 
@@ -128,14 +128,14 @@ namespace java thrift.domain
 /**
 * 测试类
 **/
-struct WmCreateAccountRespone {
+struct TestCreateAccountRespone {
     1:i32 code,
     2:string message,
 }
 ```
 
 编译器需要大家去下载对应的版本 windows和linux下不同的编译器，下载地址http://archive.apache.org/dist/thrift/0.8.0/ 下载0.8.0版本即可,0.8.0版本是很老的版本了，但是相对稳定，后续会把thirft版本升级。如果上面地址下载不下来或者失效，可以上作者的网盘上下载zip包，上面有win版本和mac，linux版本的0.8.0的thrift编译器，链接: https://pan.baidu.com/s/1JpLqVbmokTOe30nU_TznWw 提取码: ntye，
-编译上面三个文件 thrift -gen java WmCreateAccountService.thrift, thrift -gen java WmCreateAccountRequest.thrift, thrift -gen java WmCreateAccountRespone.thrift 在当前目录下会生成3个java文件 这三个文件分别是请求体，返回体，和服务类，就这么简单 Ok作为开发者而言，所有的准备工作都结束了。下面就开始进入实际开发~
+编译上面三个文件 thrift -gen java TestCreateAccountService.thrift, thrift -gen java TestCreateAccountRequest.thrift, thrift -gen java TestCreateAccountRespone.thrift 在当前目录下会生成3个java文件 这三个文件分别是请求体，返回体，和服务类，就这么简单 Ok作为开发者而言，所有的准备工作都结束了。下面就开始进入实际开发~
 
 #### 2：xml配置方式
 **1. 客户端同步调用**
@@ -153,8 +153,8 @@ struct WmCreateAccountRespone {
                            http://www.koalas.com/schema/ch
                            http://www.koalas.com/schema/ch.xsd">
 
-	<koalas:client id="wmCreateAccountService1"
-			   serviceInterface="thrift.service.WmCreateAccountService"
+	<koalas:client id="TestCreateAccountService1"
+			   serviceInterface="thrift.service.TestCreateAccountService"
 			   zkPath="127.0.0.1:2181"/>
 </beans>
 
@@ -169,30 +169,30 @@ package thrift.service;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import thrift.domain.WmCreateAccountRequest;
-import thrift.domain.WmCreateAccountRespone;
+import thrift.domain.TestCreateAccountRequest;
+import thrift.domain.TestCreateAccountRespone;
 
 @Service("testService")
 public class TestService {
 
     @Autowired
-    WmCreateAccountService.Iface wmCreateAccountService;
+    TestCreateAccountService.Iface TestCreateAccountService;
 
     public void getRemoteRpc() throws TException {
 
-        WmCreateAccountRequest request= new WmCreateAccountRequest (  );
+        TestCreateAccountRequest request= new TestCreateAccountRequest (  );
         //request.setSource ( 10 );
         request.setAccountType ( 1 );
         request.setPartnerId ( 1 );
         request.setPartnerType ( 1 );
         request.setPartnerName ( "你好" );
         request.setPoiFlag ( 1 );
-        WmCreateAccountRespone respone = wmCreateAccountService.getRPC (  request);
+        TestCreateAccountRespone respone = TestCreateAccountService.getRPC (  request);
         System.out.println (respone);
      }
 }
 ```
-就这么简单一个高性能的RPC框架就诞生了。WmCreateAccountService是thrift自动生成的，作为使用者而言不需要做任何事情，只需要在spring bean中注入xxx.Iface即可。
+就这么简单一个高性能的RPC框架就诞生了。TestCreateAccountService是thrift自动生成的，作为使用者而言不需要做任何事情，只需要在spring bean中注入xxx.Iface即可。
 
 
 **2. 客户端异步调用**
@@ -211,8 +211,8 @@ public class TestService {
                            http://www.koalas.com/schema/ch
                            http://www.koalas.com/schema/ch.xsd">
 
-	<koalas:client id="wmCreateAccountService2"
-	       serviceInterface="thrift.service.WmCreateAccountService"
+	<koalas:client id="TestCreateAccountService2"
+	       serviceInterface="thrift.service.TestCreateAccountService"
                zkPath="127.0.0.1:2181"
 	       async="true"/>
 </beans>
@@ -227,25 +227,25 @@ import client.async.KoalasAsyncCallBack;
 import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import thrift.domain.WmCreateAccountRequest;
-import thrift.domain.WmCreateAccountRespone;
+import thrift.domain.TestCreateAccountRequest;
+import thrift.domain.TestCreateAccountRespone;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 @Service("testService")
 public class TestService2 {
     @Autowired
-    WmCreateAccountService.AsyncIface wmCreateAccountService;
+    TestCreateAccountService.AsyncIface TestCreateAccountService;
     public void getRemoteRpc() throws TException{
-        KoalasAsyncCallBack<WmCreateAccountRespone, WmCreateAccountService.AsyncClient.getRPC_call> 
+        KoalasAsyncCallBack<TestCreateAccountRespone, TestCreateAccountService.AsyncClient.getRPC_call> 
         koalasAsyncCallBack = new KoalasAsyncCallBack<> ();
-        WmCreateAccountRequest request= new WmCreateAccountRequest (  );
+        TestCreateAccountRequest request= new TestCreateAccountRequest (  );
         request.setAccountType ( 1 );
         request.setPartnerId ( 1 );
         request.setPartnerType ( 1 );
         request.setPartnerName ( "你好啊" );
         request.setPoiFlag ( 1 );
-        wmCreateAccountService.getRPC ( request ,koalasAsyncCallBack);
-        Future<WmCreateAccountRespone> future= koalasAsyncCallBack.getFuture ();
+        TestCreateAccountService.getRPC ( request ,koalasAsyncCallBack);
+        Future<TestCreateAccountRespone> future= koalasAsyncCallBack.getFuture ();
         try {
             //to get other things
             System.out.println (future.get ());
@@ -275,9 +275,9 @@ public class TestService2 {
 	   http://www.koalas.com/schema/ch
 	   http://www.koalas.com/schema/ch.xsd">
 
-    <koalas:server id="WmCreateAccountService"
-                   serviceInterface="thrift.service.WmCreateAccountService"
-                   serviceImpl="wmCreateAccountServiceImpl"
+    <koalas:server id="TestCreateAccountService"
+                   serviceInterface="thrift.service.TestCreateAccountService"
+                   serviceImpl="TestCreateAccountServiceImpl"
                    port="8001"
                    zkpath="127.0.0.1:2181"/>
 </beans>
@@ -286,18 +286,18 @@ public class TestService2 {
 
 ```
 @Service
-public class WmCreateAccountServiceImpl implements WmCreateAccountService.Iface {
+public class TestCreateAccountServiceImpl implements TestCreateAccountService.Iface {
     @Override
-    public WmCreateAccountRespone getRPC(WmCreateAccountRequest wmCreateAccountRequest) throws TException {
-        WmCreateAccountRespone wmCreateAccountRespone = new WmCreateAccountRespone ();
-        wmCreateAccountRespone.setCode ( 1 );
-        wmCreateAccountRespone.setMessage ( "你好" );
+    public TestCreateAccountRespone getRPC(TestCreateAccountRequest TestCreateAccountRequest) throws TException {
+        TestCreateAccountRespone TestCreateAccountRespone = new TestCreateAccountRespone ();
+        TestCreateAccountRespone.setCode ( 1 );
+        TestCreateAccountRespone.setMessage ( "你好" );
         if(new Random (  ).nextInt ( 5 )>100){
             throw new RuntimeException ( "测试错误" );
         }
-        System.out.println ( "getRPC  start ...." + wmCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
+        System.out.println ( "getRPC  start ...." + TestCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
 
-        return wmCreateAccountRespone;
+        return TestCreateAccountRespone;
     }
 }
 ```
@@ -332,17 +332,17 @@ java中使用
 public class TestServiceSync {
 
     @KoalasClient(zkPath = "127.0.0.1:2181",readTimeout = 5000*1000)
-    WmCreateAccountService.Iface wmCreateAccountService;
+    TestCreateAccountService.Iface TestCreateAccountService;
 
     public void getRemoteRpc() throws TException {
-        WmCreateAccountRequest request= new WmCreateAccountRequest (  );
+        TestCreateAccountRequest request= new TestCreateAccountRequest (  );
         //request.setSource ( 10 );
         request.setAccountType ( 1 );
         request.setPartnerId ( 1 );
         request.setPartnerType ( 1 );
         request.setPartnerName ( "你好啊-我是注解实现的" );
         request.setPoiFlag ( 1 );
-        WmCreateAccountRespone respone = wmCreateAccountService.getRPC (  request);
+        TestCreateAccountRespone respone = TestCreateAccountService.getRPC (  request);
         System.out.println (respone);
      }
 
@@ -354,18 +354,18 @@ public class TestServiceSync {
 @Service("testServiceAsync")
 public class TestServiceAsync {
     @KoalasClient(zkPath = "127.0.0.1:2181",readTimeout = 5000*1000)
-    WmCreateAccountService.AsyncIface wmCreateAccountService;
+    TestCreateAccountService.AsyncIface TestCreateAccountService;
     public void getRemoteRpc() throws TException{
-        KoalasAsyncCallBack<WmCreateAccountRespone, WmCreateAccountService.AsyncClient.getRPC_call> koalasAsyncCallBack = new KoalasAsyncCallBack<> ();
-        WmCreateAccountRequest request= new WmCreateAccountRequest (  );
+        KoalasAsyncCallBack<TestCreateAccountRespone, TestCreateAccountService.AsyncClient.getRPC_call> koalasAsyncCallBack = new KoalasAsyncCallBack<> ();
+        TestCreateAccountRequest request= new TestCreateAccountRequest (  );
         //request.setSource ( 10 );
         request.setAccountType ( 1 );
         request.setPartnerId ( 1 );
         request.setPartnerType ( 1 );
         request.setPartnerName ( "你好啊-我是注解实现的" );
         request.setPoiFlag ( 1 );
-        wmCreateAccountService.getRPC ( request ,koalasAsyncCallBack);
-        Future<WmCreateAccountRespone> future= koalasAsyncCallBack.getFuture ();
+        TestCreateAccountService.getRPC ( request ,koalasAsyncCallBack);
+        Future<TestCreateAccountRespone> future= koalasAsyncCallBack.getFuture ();
         try {
             System.out.println (future.get ());
         } catch (InterruptedException e) {
@@ -385,11 +385,11 @@ public class TestServiceAsync {
 如果package属性设置为空，那么所有的@KoalasClient都会生效，也就是说所有在spring bean中的自定义注解@KoalasClient都会自动注入。这里说另外一种用法
 
 ```
-private WmCreateAccountService.Iface wmCreateAccountService;
+private TestCreateAccountService.Iface TestCreateAccountService;
 
 @KoalasClient(zkPath = "127.0.0.1:2181",readTimeout = 5000*1000)
-public void setWmCreateAccountService(WmCreateAccountService.Iface wmCreateAccountService){
-    this.wmCreateAccountService = wmCreateAccountService;
+public void setTestCreateAccountService(TestCreateAccountService.Iface TestCreateAccountService){
+    this.TestCreateAccountService = TestCreateAccountService;
 }
 ```
 直接注入方法的方式也是可以的。
@@ -418,21 +418,21 @@ package thrift.annotation.server.impl;
 
 import annotation.KoalasServer;
 import org.apache.thrift.TException;
-import thrift.domain.WmCreateAccountRequest;
-import thrift.domain.WmCreateAccountRespone;
-import thrift.service.WmCreateAccountService;
+import thrift.domain.TestCreateAccountRequest;
+import thrift.domain.TestCreateAccountRespone;
+import thrift.service.TestCreateAccountService;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @KoalasServer ( port = 8801,zkpath="127.0.0.1:2181")
-public class WmCreateAccountServiceNettyImpl implements WmCreateAccountService.Iface {
+public class TestCreateAccountServiceNettyImpl implements TestCreateAccountService.Iface {
     private AtomicInteger atomicInteger = new AtomicInteger ( 0 );
     @Override
-    public WmCreateAccountRespone getRPC(WmCreateAccountRequest wmCreateAccountRequest) throws TException {
-        WmCreateAccountRespone wmCreateAccountRespone = new WmCreateAccountRespone ();
-        wmCreateAccountRespone.setCode ( 1 );
-        wmCreateAccountRespone.setMessage ( "你好啊" );
+    public TestCreateAccountRespone getRPC(TestCreateAccountRequest TestCreateAccountRequest) throws TException {
+        TestCreateAccountRespone TestCreateAccountRespone = new TestCreateAccountRespone ();
+        TestCreateAccountRespone.setCode ( 1 );
+        TestCreateAccountRespone.setMessage ( "你好啊" );
         if(new Random (  ).nextInt ( 5 )>100){
             try {
                 Thread.sleep ( 5000 );
@@ -440,9 +440,9 @@ public class WmCreateAccountServiceNettyImpl implements WmCreateAccountService.I
                 e.printStackTrace ();
             }
         }
-        System.out.println ( "getRPC  start ...." + wmCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
+        System.out.println ( "getRPC  start ...." + TestCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
 
-        return wmCreateAccountRespone;
+        return TestCreateAccountRespone;
     }
 }
 ```
@@ -458,9 +458,9 @@ package thrift.annotation.server.impl;
 
 import annotation.KoalasServer;
 import org.apache.thrift.TException;
-import thrift.domain.WmCreateAccountRequest;
-import thrift.domain.WmCreateAccountRespone;
-import thrift.service.WmCreateAccountService;
+import thrift.domain.TestCreateAccountRequest;
+import thrift.domain.TestCreateAccountRespone;
+import thrift.service.TestCreateAccountService;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -468,13 +468,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @KoalasServer ( port = 8801,zkpath="127.0.0.1:2181")
 @Service
-public class WmCreateAccountServiceNettyImpl implements WmCreateAccountService.Iface {
+public class TestCreateAccountServiceNettyImpl implements TestCreateAccountService.Iface {
     private AtomicInteger atomicInteger = new AtomicInteger ( 0 );
     @Override
-    public WmCreateAccountRespone getRPC(WmCreateAccountRequest wmCreateAccountRequest) throws TException {
-        WmCreateAccountRespone wmCreateAccountRespone = new WmCreateAccountRespone ();
-        wmCreateAccountRespone.setCode ( 1 );
-        wmCreateAccountRespone.setMessage ( "你好啊" );
+    public TestCreateAccountRespone getRPC(TestCreateAccountRequest TestCreateAccountRequest) throws TException {
+        TestCreateAccountRespone TestCreateAccountRespone = new TestCreateAccountRespone ();
+        TestCreateAccountRespone.setCode ( 1 );
+        TestCreateAccountRespone.setMessage ( "你好啊" );
         if(new Random (  ).nextInt ( 5 )>100){
             try {
                 Thread.sleep ( 5000 );
@@ -482,9 +482,9 @@ public class WmCreateAccountServiceNettyImpl implements WmCreateAccountService.I
                 e.printStackTrace ();
             }
         }
-        System.out.println ( "getRPC  start ...." + wmCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
+        System.out.println ( "getRPC  start ...." + TestCreateAccountRequest + "------" + atomicInteger.incrementAndGet () );
 
-        return wmCreateAccountRespone;
+        return TestCreateAccountRespone;
     }
 }
 ```
@@ -502,8 +502,8 @@ public class WmCreateAccountServiceNettyImpl implements WmCreateAccountService.I
 xml使用方式
 
 ```
-<koalas:client id="wmCreateAccountService3"
-				   serviceInterface="thrift.service.WmCreateAccountService"
+<koalas:client id="TestCreateAccountService3"
+				   serviceInterface="thrift.service.TestCreateAccountService"
 				   zkPath="127.0.0.1:2181"
 				   generic="true"
 				   readTimeout="50000000"/>
@@ -511,22 +511,22 @@ xml使用方式
 
 ```
 @Autowired
-@Qualifier("wmCreateAccountService3")
-GenericService.Iface wmGenericService;
+@Qualifier("TestCreateAccountService3")
+GenericService.Iface TestGenericService;
 
 public void getGenericRpc() throws TException {
         GenericRequest request = new GenericRequest (  );
         request.setMethodName ( "getRPC" );
 
         request.setClassType ( new ArrayList<String> (  ){{
-            add ( "thrift.domain.WmCreateAccountRequest");
+            add ( "thrift.domain.TestCreateAccountRequest");
         }} );
 
         request.setRequestObj ( new ArrayList<String> (  ){{
             add ( "{\"accountType\":1,\"partnerId\":1,\"partnerName\":\"你好\",\"partnerType\":1,\"poiFlag\":1,\"source\":0}");
         }} );
 
-        String str = wmGenericService.invoke ( request );
+        String str = TestGenericService.invoke ( request );
         System.out.println (str);
     }
 ```
@@ -534,7 +534,7 @@ public void getGenericRpc() throws TException {
 
 注解使用方式
 ```
- @KoalasClient(zkPath = "127.0.0.1:2181",readTimeout = 5000*1000,genericService = "thrift.service.WmCreateAccountService")
+ @KoalasClient(zkPath = "127.0.0.1:2181",readTimeout = 5000*1000,genericService = "thrift.service.TestCreateAccountService")
  GenericService.Iface genericService;
  
  public void getGenericRemoteRpc() throws TException {
@@ -542,7 +542,7 @@ public void getGenericRpc() throws TException {
         request.setMethodName ( "getRPC" );
 
         request.setClassType ( new ArrayList<String> (  ){{
-            add ( "thrift.domain.WmCreateAccountRequest");
+            add ( "thrift.domain.TestCreateAccountRequest");
         }} );
 
         request.setRequestObj ( new ArrayList<String> (  ){{
@@ -559,7 +559,7 @@ public void getGenericRpc() throws TException {
 
 ```
         KoalasClientProxy koalasClientProxy = new KoalasClientProxy();
-        koalasClientProxy.setServiceInterface ( "thrift.service.WmCreateAccountService" );
+        koalasClientProxy.setServiceInterface ( "thrift.service.TestCreateAccountService" );
         koalasClientProxy.setZkPath ("127.0.0.1:2181"  );
         koalasClientProxy.setGeneric ( true );
         koalasClientProxy.setReadTimeout ( 50000000 );
@@ -569,7 +569,7 @@ public void getGenericRpc() throws TException {
         request.setMethodName ( "getRPC" );
 
         request.setClassType ( new ArrayList<String> (  ){{
-            add ( "thrift.domain.WmCreateAccountRequest");
+            add ( "thrift.domain.TestCreateAccountRequest");
         }} );
 
         request.setRequestObj ( new ArrayList<String> (  ){{
@@ -596,9 +596,9 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
-import thrift.domain.WmCreateAccountRequest;
-import thrift.domain.WmCreateAccountRespone;
-import thrift.service.WmCreateAccountService;
+import thrift.domain.TestCreateAccountRequest;
+import thrift.domain.TestCreateAccountRespone;
+import thrift.service.TestCreateAccountService;
 
 public class ThriftNative {
     public static final String SERVER_IP = "localhost";
@@ -608,10 +608,10 @@ public class ThriftNative {
     public static void main(String[] args) throws TException {
         TTransport transport = new TFramedTransport (new TSocket (SERVER_IP, SERVER_PORT, TIMEOUT));
         TProtocol protocol = new TBinaryProtocol (transport);
-        WmCreateAccountService.Client client = new WmCreateAccountService.Client(protocol);
+        TestCreateAccountService.Client client = new TestCreateAccountService.Client(protocol);
         transport.open();
 
-        WmCreateAccountRequest request= new WmCreateAccountRequest (  );
+        TestCreateAccountRequest request= new TestCreateAccountRequest (  );
         //request.setSource ( 10 );
         request.setAccountType ( 1 );
         request.setPartnerId ( 1 );
@@ -619,7 +619,7 @@ public class ThriftNative {
         request.setPartnerName ( "你好啊-我是ThriftNative实现的服务端getRemoteRpc" );
         request.setPoiFlag ( 1 );
 
-        WmCreateAccountRespone respone=client.getRPC (request  );
+        TestCreateAccountRespone respone=client.getRPC (request  );
         System.out.println (respone);
 
     }
@@ -722,9 +722,9 @@ public static boolean verify(byte[] data, String publicKey, String sign)
 
 ```
 下面四个字符串为koalas-rpc中客户端和服务端使用的rsa非对称秘钥，复制使用即可
-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
+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
 上面四个字符串为koalas-rpc中客户端和服务端使用的rsa非对称秘钥，复制使用即可
 ```

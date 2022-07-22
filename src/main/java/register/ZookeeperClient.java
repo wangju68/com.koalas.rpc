@@ -405,6 +405,7 @@ public class ZookeeperClient {
                         String ip = str.split ( "-" )[0];
                         String port = str.split ( "-" )[1];
 
+
                         if (serverList != null) {
                             for(int i=serverList.size ()-1;i>=0;i--){
                                 RemoteServer remoteServer =serverList.get ( i );

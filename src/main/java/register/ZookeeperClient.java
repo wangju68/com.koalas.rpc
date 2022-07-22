@@ -402,6 +402,7 @@ public class ZookeeperClient {
                 if (serverHeartbeatMap != null && serverHeartbeatMap.size() > 0) {
                     Iterator<String> key = serverHeartbeatMap.keySet().iterator();
                     in:
+
                     while (key.hasNext()) {
                         String str = key.next();
                         // 获取ip和端口
